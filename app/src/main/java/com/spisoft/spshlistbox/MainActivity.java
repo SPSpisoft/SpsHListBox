@@ -2,6 +2,7 @@ package com.spisoft.spshlistbox;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         SpLateBox spLateBoxAdd = findViewById(R.id.splatboxAdd);
-        spLateBoxAdd.SetHeadSrc(R.drawable.ic_baseline_location_on_24);
+        spLateBoxAdd.SetHeadSrc(R.drawable.ic_baseline_location_on_24, 0, 0);
 
         LayoutInflater inflater0 = LayoutInflater.from(MainActivity.this);
         spLateBoxAdd.AddView(inflater0.inflate(R.layout.test_view, null));
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         SpLateBox spLateBoxTel = findViewById(R.id.splatboxTel);
-        spLateBoxTel.SetHeadSrc(R.drawable.ic_baseline_phone_enabled_24);
+        spLateBoxTel.SetHeadSrc(R.drawable.ic_baseline_phone_enabled_24, Color.BLUE, Color.WHITE);
 
         LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
         View inflatedLayout = inflater.inflate(R.layout.test_view, null);
@@ -66,12 +67,13 @@ public class MainActivity extends AppCompatActivity {
                             .setAction("OK", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    spLateBoxTel.setMode(false);
+                                    spLateBoxTel.setMode(false, -1);
                                 }
                             })
                             .setActionTextColor(getResources().getColor(android.R.color.holo_red_light))
                             .show();
                 }else {
+                    inflatedLayout.setTag(null);
                     editText.setText("");
                 }
             }
@@ -81,13 +83,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onEvent(boolean editMode, int currentPosition) {
                 if(!editMode){
+                    inflatedLayout.setTag(currentPosition);
                     editText.setText(mList.get(currentPosition).getOptTitle());
                 }else {
                     Snackbar.make(spLateBoxTel, "SAVE", Snackbar.LENGTH_INDEFINITE)
                             .setAction("OK", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    spLateBoxTel.setMode(false);
+                                    int skipTo;
+                                    if(inflatedLayout.getTag() == null){
+                                        mList.add(new ClsTest("4", editText.getText().toString(), true));
+                                        skipTo = mList.size()-1;
+                                    }else {
+                                        mList.get(currentPosition).setOptTitle(editText.getText().toString());
+                                        skipTo = currentPosition;
+                                    }
+                                    testListAdapter.updateList(mList);
+                                    spLateBoxTel.setMode(false, skipTo);
                                 }
                             })
                             .setActionTextColor(getResources().getColor(android.R.color.holo_red_light))

@@ -94,8 +94,8 @@ public class SpLateBox extends RelativeLayout {
             public void onClick(View v) {
                 int __CurrentPosition = HorizontalLayout.findFirstVisibleItemPosition();
                 if(__CurrentPosition > 0)
-                    HorizontalLayout.scrollToPositionWithOffset(HorizontalLayout.findFirstVisibleItemPosition()-1, 0);
-//                if(__CurrentPosition == 1)
+                    HorizontalLayout.smoothScrollToPosition(IncRecyclerView, null ,HorizontalLayout.findFirstVisibleItemPosition()-1);
+//                    HorizontalLayout.scrollToPositionWithOffset(HorizontalLayout.findFirstVisibleItemPosition()-1, 0);
             }
         });
 
@@ -104,7 +104,7 @@ public class SpLateBox extends RelativeLayout {
             public void onClick(View v) {
                 mOnEditClickTaskListener.onEvent(isEditMode, HorizontalLayout.findFirstVisibleItemPosition());
                 if (!isEditMode)
-                    setMode(true);
+                    setMode(true, -1);
             }
         });
 
@@ -113,7 +113,7 @@ public class SpLateBox extends RelativeLayout {
             public void onClick(View v) {
                 mOnAddClickTaskListener.onEvent(isEditMode);
                 if (!isEditMode)
-                    setMode(true);
+                    setMode(true, -1);
             }
         });
 
@@ -155,7 +155,7 @@ public class SpLateBox extends RelativeLayout {
         a.recycle();
     }
 
-    public void setMode(boolean editMode){
+    public void setMode(boolean editMode, int currentPosition){
         if (editMode)
         {
             vEdit.setVisibility(VISIBLE);
@@ -167,6 +167,7 @@ public class SpLateBox extends RelativeLayout {
         }
         else
         {
+            RefreshCntText();
             if(IncRecyclerView.getAdapter() == null || IncRecyclerView.getAdapter().getItemCount() == 0){
                 vEdit.setVisibility(GONE);
                 LyCnt.setVisibility(GONE);
@@ -178,6 +179,9 @@ public class SpLateBox extends RelativeLayout {
             vAdd.setIcon(mIconAdd);
             IncRecyclerView.setVisibility(VISIBLE);
             vMain.setVisibility(GONE);
+
+            if(currentPosition >= 0)
+                HorizontalLayout.smoothScrollToPosition(IncRecyclerView, null , currentPosition);
         }
 
         isEditMode = editMode;
@@ -199,8 +203,10 @@ public class SpLateBox extends RelativeLayout {
 //        }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    public SpLateBox SetHeadSrc(int headSrc){
+    public SpLateBox SetHeadSrc(int headSrc, int fillColor, int strokeColor){
         IvsHead.setIcon(getResources().getDrawable(headSrc));
+        if(strokeColor != 0) IvsHead.setStrokeColor(strokeColor);
+        if(fillColor != 0) IvsHead.setFillColor(fillColor);
         invalidate();
         return this;
     }
@@ -245,12 +251,10 @@ public class SpLateBox extends RelativeLayout {
         });
 
         IncRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @SuppressLint("SetTextI18n")
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                String CurrentItem = String.valueOf(HorizontalLayout.findFirstVisibleItemPosition()+1);
-                vText.setText("  " + CurrentItem + "/" + HorizontalLayout.getItemCount() + "  ");
+                RefreshCntText();
             }
         });
 
@@ -261,6 +265,12 @@ public class SpLateBox extends RelativeLayout {
 
         IncRecyclerView.invalidate();
         return this;
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void RefreshCntText() {
+        String CurrentItem = String.valueOf(HorizontalLayout.findFirstVisibleItemPosition()+1);
+        vText.setText("  " + CurrentItem + "/" + HorizontalLayout.getItemCount() + "  ");
     }
 
     public SpLateBox AddView(View view){
