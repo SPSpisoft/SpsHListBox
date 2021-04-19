@@ -10,6 +10,6 @@
   
   
   
-  dependencies {
+	dependencies {
 	        implementation 'com.github.SPSpisoft:SpsHListBox:Tag'
 	}
