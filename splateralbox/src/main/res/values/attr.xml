@@ -5,15 +5,15 @@
 
         <attr name="src_head" format="integer"/>
 
-        <attr name="SizeHeight" format="dimension"/>
-        <attr name="CurrentMode" format="integer"/>
+<!--        <attr name="SizeHeight" format="dimension"/>-->
+<!--        <attr name="CurrentMode" format="integer"/>-->
 
-        <attr name="ModeStatus" format="enum">
-            <enum name="STATUS_SEL_MAX" value="-2"/>
-            <enum name="STATUS_NO_INVENTORY" value="-1"/>
-            <enum name="STATUS_NORMAL_NOT_SEL" value="0"/>
-            <enum name="STATUS_SELECT_MODE" value="1"/>
-        </attr>
+<!--        <attr name="ModeStatus" format="enum">-->
+<!--            <enum name="STATUS_SEL_MAX" value="-2"/>-->
+<!--            <enum name="STATUS_NO_INVENTORY" value="-1"/>-->
+<!--            <enum name="STATUS_NORMAL_NOT_SEL" value="0"/>-->
+<!--            <enum name="STATUS_SELECT_MODE" value="1"/>-->
+<!--        </attr>-->
 
         <attr name="icon_add" format="reference" />
         <attr name="icon_edit" format="reference" />
