@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--    <com.spisoft.roundedimageview.RoundedImageView-->
+    <!--        android:id="@+id/ivsHead"-->
+    <!--        android:layout_marginStart="@dimen/sps_lpr_sz_50"-->
+    <!--        android:layout_height="@dimen/sps_lpr_sz_50"-->
+    <!--        android:layout_width="@dimen/sps_lpr_sz_50"-->
+    <!--        android:layout_marginEnd="@dimen/sps_lpr_5"-->
+    <!--        android:src="@drawable/abc_vector_test"-->
+    <!--        android:elevation="2dp"-->
+    <!--        app:civ_type="circle"-->
+    <!--        app:civ_padding="4dp"-->
+    <!--        app:civ_border_color="@color/design_default_color_primary"-->
+    <!--        app:civ_border_width="1dp"-->
+    <!--        app:civ_ratio_width="6"-->
+    <!--        app:civ_ratio_height="6"/>-->
+
+    <com.spisoft.spcircleview.CircleView
+        android:id="@+id/cv_head"
+        android:elevation="2dp"
+        android:layout_height="@dimen/sps_lpr_sz_40"
+        android:layout_width="@dimen/sps_lpr_sz_40"
+        android:layout_marginStart="@dimen/sps_lpr_sz_30"
+        app:cv_icon_margin="@dimen/sps_lpr_10"
+        app:cv_strokeColorValue="@android:color/white"
+        app:cv_fillColor="@android:color/white"
+        app:cv_backgroundColorValue="@android:color/darker_gray"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/sps_lpr_sz_20"
+        app:strokeColor="@android:color/darker_gray"
+        app:strokeWidth="1dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/incRecyclerView"
+            android:layout_marginTop="@dimen/sps_lpr_sz_20"
+            android:layout_marginBottom="@dimen/sps_lpr_sz_16"
+            android:layout_marginStart="@dimen/sps_lpr_sz_16"
+            android:layout_marginEnd="@dimen/sps_lpr_sz_16"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <RelativeLayout
+            android:id="@+id/lyMain"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/sps_lpr_sz_20"
+            android:layout_marginBottom="@dimen/sps_lpr_sz_16"
+            android:layout_marginStart="@dimen/sps_lpr_sz_16"
+            android:layout_marginEnd="@dimen/sps_lpr_sz_16"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:id="@+id/lyControl"
+        android:elevation="2dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/sps_lpr_5"
+        android:layout_marginEnd="@dimen/sps_lpr_sz_30"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+<!--        <com.spisoft.spcircleview.CircleView-->
+<!--            android:id="@+id/cv_delete"-->
+<!--            android:layout_height="@dimen/sps_lpr_sz_30"-->
+<!--            android:layout_width="@dimen/sps_lpr_sz_30"-->
+<!--            android:layout_marginStart="@dimen/sps_lpr_5"-->
+<!--            app:cv_icon="@drawable/ic_baseline_delete_24"-->
+<!--            app:cv_icon_margin="@dimen/sps_lpr_7"-->
+<!--            app:cv_fillColor="@android:color/white"-->
+<!--            app:cv_strokeColorValue="@android:color/white"-->
+<!--            app:cv_backgroundColorValue="@android:color/darker_gray"/>-->
+
+        <com.spisoft.spcircleview.CircleView
+            android:id="@+id/cv_edit"
+            android:visibility="gone"
+            android:layout_height="@dimen/sps_lpr_sz_30"
+            android:layout_width="@dimen/sps_lpr_sz_30"
+            android:layout_marginStart="@dimen/sps_lpr_5"
+            app:cv_icon="@drawable/ic_baseline_edit_24"
+            app:cv_icon_margin="@dimen/sps_lpr_7"
+            app:cv_fillColor="@android:color/white"
+            app:cv_strokeColorValue="@android:color/white"
+            app:cv_backgroundColorValue="@android:color/darker_gray"/>
+
+        <com.spisoft.spcircleview.CircleView
+            android:id="@+id/cv_add"
+            android:layout_height="@dimen/sps_lpr_sz_30"
+            android:layout_width="@dimen/sps_lpr_sz_30"
+            android:layout_marginStart="@dimen/sps_lpr_5"
+            app:cv_icon="@drawable/ic_baseline_library_add_24"
+            app:cv_icon_margin="@dimen/sps_lpr_7"
+            app:cv_fillColor="@android:color/white"
+            app:cv_strokeColorValue="@android:color/white"
+            app:cv_backgroundColorValue="@android:color/darker_gray"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyCnt"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/sps_lpr_5"
+        android:layout_marginEnd="@dimen/sps_lpr_5"
+        android:layout_marginBottom="@dimen/sps_lpr_5"
+        android:elevation="2dp">
+
+        <com.spisoft.spcircleview.CircleView
+            android:id="@+id/cv_before"
+            android:layout_height="@dimen/sps_lpr_sz_30"
+            android:layout_width="@dimen/sps_lpr_sz_30"
+            app:cv_icon="@drawable/ic_baseline_navigate_before_24"
+            app:cv_icon_margin="@dimen/sps_lpr_5"
+            app:cv_strokeColorValue="@android:color/white"
+            app:cv_fillColor="@android:color/white"
+            app:cv_backgroundColorValue="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/txtDesc"
+            android:textColor="@android:color/darker_gray"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/sps_lpr_5"
+            android:layout_marginEnd="@dimen/sps_lpr_5"
+            android:elevation="1dp"
+            android:outlineProvider="none"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.spisoft.spcircleview.CircleView
+            android:id="@+id/cv_next"
+            android:layout_height="@dimen/sps_lpr_sz_30"
+            android:layout_width="@dimen/sps_lpr_sz_30"
+            android:layout_marginEnd="@dimen/sps_lpr_5"
+            app:cv_icon="@drawable/ic_baseline_navigate_next_24"
+            app:cv_icon_margin="@dimen/sps_lpr_5"
+            app:cv_strokeColorValue="@android:color/white"
+            app:cv_fillColor="@android:color/white"
+            app:cv_backgroundColorValue="@android:color/darker_gray"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

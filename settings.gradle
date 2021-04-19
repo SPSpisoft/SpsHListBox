@@ -1,0 +1,3 @@
+include ':splateralbox'
+include ':app'
+rootProject.name = "SpsHListBox"
