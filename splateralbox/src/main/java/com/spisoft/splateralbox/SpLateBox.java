@@ -70,13 +70,13 @@ public class SpLateBox extends RelativeLayout {
         vText = rootView.findViewById(R.id.txtDesc);
 
         Configuration config = getResources().getConfiguration();
-        if(config.getLayoutDirection() != View.LAYOUT_DIRECTION_RTL) {
-            vBefore.setIcon(getResources().getDrawable(R.drawable.ic_baseline_navigate_before_24));
-            vNext.setIcon(getResources().getDrawable(R.drawable.ic_baseline_navigate_next_24));
-        }else {
-            vBefore.setIcon(getResources().getDrawable(R.drawable.ic_baseline_navigate_next_24));
-            vNext.setIcon(getResources().getDrawable(R.drawable.ic_baseline_navigate_before_24));
-        }
+//        if(config.getLayoutDirection() != View.LAYOUT_DIRECTION_RTL) {
+//            vBefore.setIcon(getResources().getDrawable(R.drawable.ic_baseline_navigate_before_24));
+//            vNext.setIcon(getResources().getDrawable(R.drawable.ic_baseline_navigate_next_24));
+//        }else {
+//            vBefore.setIcon(getResources().getDrawable(R.drawable.ic_baseline_navigate_next_24));
+//            vNext.setIcon(getResources().getDrawable(R.drawable.ic_baseline_navigate_before_24));
+//        }
 
         vNext.setOnClickListener(v -> {
             int __CurrentPosition = HorizontalLayout.findFirstVisibleItemPosition();
@@ -112,14 +112,14 @@ public class SpLateBox extends RelativeLayout {
             mIconAdd = getResources().getDrawable(drawableResId_Add);
         else
             mIconAdd = getResources().getDrawable(R.drawable.ic_baseline_add_24);
-        vAdd.setIcon(mIconAdd);
+//        vAdd.setIcon(mIconAdd);
 
         int drawableResId_Edit = a.getResourceId(R.styleable.SpLateBox_icon_edit, -1);
         if(drawableResId_Edit >= 0)
             mIconEdit = getResources().getDrawable(drawableResId_Edit);
         else
             mIconEdit = getResources().getDrawable(R.drawable.ic_baseline_edit_24);
-        vEdit.setIcon(mIconEdit);
+//        vEdit.setIcon(mIconEdit);
 
 //        int drawableResId_Add = a.getResourceId(R.styleable.SpLateBox_icon_add, -1);
 //        if(drawableResId_Add >= 0) vAdd.setIcon(getResources().getDrawable(drawableResId_Add));
