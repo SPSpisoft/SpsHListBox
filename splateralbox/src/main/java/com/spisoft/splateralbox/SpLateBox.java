@@ -20,18 +20,17 @@ import com.nshmura.snappysmoothscroller.SnappySmoothScroller;
 import com.spisoft.spcircleview.CircleView;
 
 public class SpLateBox extends RelativeLayout {
-    private View rootView;
     private Context mContext;
-    private CircleView IvsHead;
     private RecyclerView IncRecyclerView;
     private LinearLayoutManager HorizontalLayout;
     private TextView vText;
-    private CircleView vBefore, vNext, vEdit, vAdd;
+    private CircleView IvsHead;
+    private CircleView vEdit;
+    private CircleView vAdd;
     private Drawable mIconAdd, mIconEdit, mIconSave, mIconCancel;
     private RelativeLayout vMain;
     private OnAddClickTaskListener mOnAddClickTaskListener;
     private OnEditClickTaskListener mOnEditClickTaskListener;
-    private int currentMode;
     private boolean isEditMode = false;
     private View LyCnt;
 
@@ -52,7 +51,7 @@ public class SpLateBox extends RelativeLayout {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private void initView(Context context, AttributeSet attrs, int defStyle) {
-        rootView = inflate(context, R.layout.sps_view_box, this);
+        View rootView = inflate(context, R.layout.sps_view_box, this);
 
         mContext = context;
 
@@ -60,8 +59,8 @@ public class SpLateBox extends RelativeLayout {
         IncRecyclerView = rootView.findViewById(R.id.incRecyclerView);
 
         LyCnt = rootView.findViewById(R.id.lyCnt);
-        vBefore = rootView.findViewById(R.id.cv_before);
-        vNext = rootView.findViewById(R.id.cv_next);
+        CircleView vBefore = rootView.findViewById(R.id.cv_before);
+        CircleView vNext = rootView.findViewById(R.id.cv_next);
 
         vEdit = rootView.findViewById(R.id.cv_edit);
         vAdd = rootView.findViewById(R.id.cv_add);
@@ -79,42 +78,30 @@ public class SpLateBox extends RelativeLayout {
             vNext.setIcon(getResources().getDrawable(R.drawable.ic_baseline_navigate_before_24));
         }
 
-        vNext.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int __CurrentPosition = HorizontalLayout.findFirstVisibleItemPosition();
-                if(__CurrentPosition < HorizontalLayout.getItemCount())
-                    HorizontalLayout.smoothScrollToPosition(IncRecyclerView, null ,HorizontalLayout.findFirstVisibleItemPosition()+1);
+        vNext.setOnClickListener(v -> {
+            int __CurrentPosition = HorizontalLayout.findFirstVisibleItemPosition();
+            if(__CurrentPosition < HorizontalLayout.getItemCount())
+                HorizontalLayout.smoothScrollToPosition(IncRecyclerView, null ,HorizontalLayout.findFirstVisibleItemPosition()+1);
 //                    HorizontalLayout.scrollToPositionWithOffset(HorizontalLayout.findFirstVisibleItemPosition()+1, 0);
-            }
         });
 
-        vBefore.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int __CurrentPosition = HorizontalLayout.findFirstVisibleItemPosition();
-                if(__CurrentPosition > 0)
-                    HorizontalLayout.smoothScrollToPosition(IncRecyclerView, null ,HorizontalLayout.findFirstVisibleItemPosition()-1);
+        vBefore.setOnClickListener(v -> {
+            int __CurrentPosition = HorizontalLayout.findFirstVisibleItemPosition();
+            if(__CurrentPosition > 0)
+                HorizontalLayout.smoothScrollToPosition(IncRecyclerView, null ,HorizontalLayout.findFirstVisibleItemPosition()-1);
 //                    HorizontalLayout.scrollToPositionWithOffset(HorizontalLayout.findFirstVisibleItemPosition()-1, 0);
-            }
         });
 
-        vEdit.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mOnEditClickTaskListener.onEvent(isEditMode, HorizontalLayout.findFirstVisibleItemPosition());
-                if (!isEditMode)
-                    setMode(true, -1);
-            }
+        vEdit.setOnClickListener(v -> {
+            mOnEditClickTaskListener.onEvent(isEditMode, HorizontalLayout.findFirstVisibleItemPosition());
+            if (!isEditMode)
+                setMode(true, -1);
         });
 
-        vAdd.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mOnAddClickTaskListener.onEvent(isEditMode);
-                if (!isEditMode)
-                    setMode(true, -1);
-            }
+        vAdd.setOnClickListener(v -> {
+            mOnAddClickTaskListener.onEvent(isEditMode);
+            if (!isEditMode)
+                setMode(true, -1);
         });
 
         //-------------------------------------------
@@ -203,15 +190,14 @@ public class SpLateBox extends RelativeLayout {
 //        }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    public SpLateBox SetHeadSrc(int headSrc, int fillColor, int strokeColor){
+    public void SetHeadSrc(int headSrc, int fillColor, int strokeColor){
         IvsHead.setIcon(getResources().getDrawable(headSrc));
         if(strokeColor != 0) IvsHead.setStrokeColor(strokeColor);
         if(fillColor != 0) IvsHead.setFillColor(fillColor);
         invalidate();
-        return this;
     }
 
-    public SpLateBox SetList(RecyclerView.Adapter<RecyclerView.ViewHolder> adapter){
+    public void SetList(RecyclerView.Adapter<RecyclerView.ViewHolder> adapter){
 //        HorizontalLayout = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
 //        IncRecyclerView.setLayoutManager(HorizontalLayout);
 //        IncRecyclerView.setAdapter(adapter);
@@ -264,7 +250,6 @@ public class SpLateBox extends RelativeLayout {
         }
 
         IncRecyclerView.invalidate();
-        return this;
     }
 
     @SuppressLint("SetTextI18n")
@@ -273,13 +258,12 @@ public class SpLateBox extends RelativeLayout {
         vText.setText("  " + CurrentItem + "/" + HorizontalLayout.getItemCount() + "  ");
     }
 
-    public SpLateBox AddView(View view){
+    public void AddView(View view){
 //        LayoutInflater inflater = LayoutInflater.from(mContext);
 //        View inflatedLayout= inflater.inflate()
         vMain.addView(view);
 //        vMain.setVisibility(VISIBLE);
         invalidate();
-        return this;
     }
 
     public interface OnAddClickTaskListener {
